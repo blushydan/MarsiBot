@@ -37,7 +37,7 @@ class CustomFormatter(logging.Formatter):
             time_color=green,
             module_color=purple,
             name_color=grey,
-            level_color=blurple,
+            level_color=cyan,
             message_color=white,
             r=reset
         ),

@@ -1,4 +1,4 @@
 /.idea
 Pipfile.lock
-/creds
-/logs
+/src/creds
+*.log
