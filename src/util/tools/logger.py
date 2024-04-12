@@ -1,6 +1,6 @@
 import logging
 
-from util.config import LogPath
+from src.util.config import LogPath
 
 
 class CustomFormatter(logging.Formatter):

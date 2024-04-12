@@ -1,7 +1,7 @@
 import coloredlogs
 
-from bot import Marsi
-from util.config import creds
+from src.bot import Marsi
+from src.util.config import BotConfig
 
 
 coloredlogs.install(level='DEBUG')
@@ -9,7 +9,7 @@ coloredlogs.install(level='DEBUG')
 
 def main():
     bot = Marsi()
-    bot.run(token=creds['DISCORD_TOKEN'], log_level='WARNING')
+    bot.run(token=BotConfig.token, log_level='WARNING')
 
 
 if __name__ == '__main__':
