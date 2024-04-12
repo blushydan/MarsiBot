@@ -12,7 +12,7 @@ class Marsi(commands.Bot):
     def __init__(self):
         super().__init__(
             intents=Intents.all(),
-            command_prefix='.',
+            command_prefix=commands.when_mentioned_or(determine_prefix),
         )
         self.logger = Logger("Marsi", Logger.DEBUG)
         self.start_time = time.time()  # Used to calculate bot startup time
