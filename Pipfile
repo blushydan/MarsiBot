@@ -7,8 +7,10 @@ name = "pypi"
 discord = "2.3.2"
 python-dotenv = "1.0.1"
 coloredlogs = "*"
+sqlalchemy = "2.0.29"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.11"

@@ -1,12 +1,11 @@
 """
 File for storing Postgresql tables in sqlalchemy format
 """
-from datetime import datetime as dt
 
 import sqlalchemy as sa
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Mapped, sessionmaker, relationship
-from sqlalchemy.dialects.mysql import ENUM
+from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.dialects.postgresql import ENUM
+
 
 Base = declarative_base()
 
@@ -144,7 +143,7 @@ class ObtainedStatusEffects(Base):
 
 
 class CommonItems(Base):
-    __table_name__ = "common_items"
+    __tablename__ = "common_items"
     id = sa.Column(sa.Integer, primary_key=True)
     item_name = sa.Column(sa.String(128), nullable=False)
     item_data = sa.Column(sa.JSON, nullable=True)  # Additional data related to the item
