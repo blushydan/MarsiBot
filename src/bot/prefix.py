@@ -1,4 +1,4 @@
-from src.database.local.prefixes_connector import PrefixesConnector
+from src.database.local import PrefixesConnector
 
 
 def determine_prefix(bot, message) -> str:

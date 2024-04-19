@@ -12,26 +12,27 @@ Base = declarative_base()
 
 class Players(Base):
     __tablename__ = "players"
-    id = sa.Column(sa.Integer, primary_key=True)
-    discord_id = sa.Column(sa.Integer, nullable=False)
+    id = sa.Column(sa.VARCHAR(4), primary_key=True)
+    discord_id = sa.Column(sa.VARCHAR(20), nullable=False)
     game_id = sa.Column(
         sa.VARCHAR(30), sa.ForeignKey("game_instances.game_id"), nullable=False
     )
-    role_id = sa.Column(sa.Integer, nullable=True)
-    ghost_role_id = sa.Column(sa.Integer, nullable=True)
+    role_id = sa.Column(sa.VARCHAR(4), nullable=True)
+    ghost_role_id = sa.Column(sa.VARCHAR(4), nullable=True)
     money = sa.Column(sa.Integer, nullable=False)
     current_sanity = sa.Column(sa.Integer, nullable=False)
     current_visits_day = sa.Column(sa.Integer, nullable=False)
     current_visits_night = sa.Column(sa.Integer, nullable=False)
     current_location = sa.Column(
-        sa.Integer, sa.ForeignKey("locations.id"), nullable=False
+        sa.VARCHAR(4), sa.ForeignKey("locations.id"), nullable=False
     )
     abilities_used = sa.Column(sa.JSON, nullable=True)
 
 
 class ActiveAbilities(Base):
     __tablename__ = "active_abilities"
-    id = sa.Column(sa.Integer, primary_key=True)
+    id = sa.Column(sa.VARCHAR(4), primary_key=True)
+    role_id = sa.Column(sa.VARCHAR(4), sa.ForeignKey(""))
     name = sa.Column(sa.String(50), nullable=False)
     description = sa.Column(sa.String(512), nullable=False)
     categories = sa.Column(sa.JSON)
@@ -44,7 +45,7 @@ class ActiveAbilities(Base):
 
 class PassiveAbilities(Base):
     __tablename__ = "passive_abilities"
-    id = sa.Column(sa.Integer, primary_key=True)
+    id = sa.Column(sa.VARCHAR(4), primary_key=True)
     name = sa.Column(sa.String(50), nullable=False)
     description = sa.Column(sa.String(512), nullable=False)
     categories = sa.Column(sa.JSON)
@@ -52,7 +53,7 @@ class PassiveAbilities(Base):
 
 class NormalRoles(Base):
     __tablename__ = "normal_roles"
-    id = sa.Column(sa.Integer, primary_key=True)
+    id = sa.Column(sa.String(4), primary_key=True)
     player_id = sa.Column(sa.Integer, sa.ForeignKey("players.id"))
     name = sa.Column(sa.String(128), nullable=False)
 

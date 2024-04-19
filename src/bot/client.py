@@ -4,18 +4,28 @@ import time
 from discord import Intents
 from discord.ext import commands
 
-from src.util import Logger
+from src.util import Logger, DatabaseConfig
 from src.bot.prefix import determine_prefix
+from src.database.connector import DatabaseConnector
 
 
 class Marsi(commands.Bot):
+    instance: "Marsi"
+
+    def __new__(cls, *args, **kwargs):  # Singleton pattern
+        if not hasattr(cls, "instance"):
+            cls.instance = super(Marsi, cls).__new__(cls)
+
+        return cls.instance
+
     def __init__(self):
+        self.logger = Logger("Marsi", Logger.DEBUG)
+        self.start_time = time.time()  # Used to calculate bot startup time
         super().__init__(
             intents=Intents.all(),
             command_prefix=commands.when_mentioned_or(determine_prefix),
         )
-        self.logger = Logger("Marsi", Logger.DEBUG)
-        self.start_time = time.time()  # Used to calculate bot startup time
+        DatabaseConnector.initialize(str(DatabaseConfig()), echo=False)
 
     def _logger_test(self):
         self.logger.debug("This is debug message")
@@ -33,3 +43,6 @@ class Marsi(commands.Bot):
         self.logger.info(f"Logged in as {self.user} ({self.user.id})")
         self.logger.info(f"Bot started in {time.time() - self.start_time:.2f} seconds")
 
+    @classmethod
+    def get_bot(cls) -> "Marsi":
+        return cls.instance

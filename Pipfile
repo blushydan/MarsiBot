@@ -8,6 +8,7 @@ discord = "2.3.2"
 python-dotenv = "1.0.1"
 coloredlogs = "*"
 sqlalchemy = "2.0.29"
+asyncpg = "0.29.0"
 
 [dev-packages]
 pytest = "*"
